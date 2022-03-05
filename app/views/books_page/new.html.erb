@@ -1,0 +1,55 @@
+<h1 class="text-muted d-flex justify-content-center">Add Book Details</h1>
+<%= form_with model: @book, url: add_book_path, local: :true do |form| %>
+  <div class="mb-3">
+    <%= form.label :title, class:"mb-2"%>
+    <%= form.text_field :title, class:"form-control", placeholder: "abc@gmail.com"%>
+    <% if @book.errors.full_messages_for(:title).any?%>
+        <div class="alert alert-danger mt-2">
+            <% @book.errors.full_messages_for(:title).each do |message| %>
+                <div><%= message %></div>
+            <% end %>
+        </div>
+    <%end%>
+
+  </div>
+  <div class="mb-3">
+    <%= form.label :author, class:"mb-2"%>
+    <%= form.text_field :author, class:"form-control", placeholder:"Author name"%>
+    <% if @book.errors.full_messages_for(:author).any?%>
+        <div class="alert alert-danger mt-2">
+            <% @book.errors.full_messages_for(:author).each do |message| %>
+                <div><%= message %></div>
+            <% end %>
+        </div>
+    <%end%>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :volume, class:"mb-2"%>
+    <%= form.text_field :volume, class:"form-control", placeholder:"Volume"%>
+    <% if @book.errors.full_messages_for(:volume).any?%>
+        <div class="alert alert-danger mt-2">
+            <% @book.errors.full_messages_for(:volume).each do |message| %>
+                <div><%= message %></div>
+            <% end %>
+        </div>
+    <%end%>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :published_in, class:"mb-2"%>
+    <%= form.text_field :published_in, class:"form-control", placeholder:"published date"%>
+    <% if @book.errors.full_messages_for(:published_in).any?%>
+        <div class="alert alert-danger mt-2">
+            <% @book.errors.full_messages_for(:published_in).each do |message| %>
+                <div><%= message %></div>
+            <% end %>
+        </div>
+    <%end%>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit "Add Book", class:"btn btn-primary"%>
+  </div>
+
+<% end %>

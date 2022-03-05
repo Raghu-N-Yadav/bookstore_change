@@ -1,0 +1,54 @@
+<h2 class="d-flex mb-3 justify-content-center text-muted">Issue book </h2>
+
+<div class="d-flex align-items-center flex-column shadow p-2 bg-light text-scondary gap-3 mb-3"> 
+  <div class="fs-4 text-warning">
+    <%= @book[:title]%>
+  </div>
+  <div>
+    Author: <%= @book[:author]%>
+  </div>
+  <div>
+    Published in: <%= @book[:published_in]%>
+  </div>
+  <div>
+    Volume: <%= @book[:volume]%>
+  </div>
+  <div>
+    Issue Status:
+    <span class="text-danger">
+    <% if @book.issued_books.present?%>
+      issued
+    <%else%>
+      Not issued
+    <%end%><span>
+  </div>
+</div>
+<h1 class="text-muted">Student Details</h1>
+
+<%= form_with url: issue_book_path(id: @book[:id]), local: :true do |form| %>
+
+  <div class="mb-3">
+    <%= form.label :name, class:"mb-2"%>
+    <%= form.text_field :name, class:"form-control", placeholder: "student name", required: true%>
+  </div>
+  <div class="mb-3">
+    <%= form.label :email, class:"mb-2"%>
+    <%= form.email_field :email, class:"form-control", placeholder: "abc@gmail.com", required: true%>
+  </div>
+  <div class="mb-3">
+    <%= form.label :book_issued, class:"mb-2"%>
+    <%= form.text_field :book_issued, class:"form-control", value: @book[:title], required: true%>
+  </div>
+  <div class="mb-3">
+    <%= form.label :issued_date, class:"mb-2"%>
+    <%= form.date_field :issued_date, class:"form-control", required: true%>
+  </div>
+  <div class="mb-3">
+    <%= form.label :return_date, class:"mb-2"%>
+    <%= form.date_field :return_date, class:"form-control", required: true%>
+  </div>
+  <div class="mb-3">
+    <%= form.submit "Issue Book", class:"btn btn-primary"%>
+  </div>
+
+<% end %>

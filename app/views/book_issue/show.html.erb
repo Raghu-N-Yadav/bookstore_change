@@ -1,0 +1,50 @@
+<h2 class="d-flex mb-3 justify-content-center text-muted">Book Details</h2>
+
+<div class="d-flex align-items-center flex-column shadow p-2 bg-light text-scondary gap-3 mb-3"> 
+  <div class="fs-4 text-warning">
+    <%= @book[:title]%>
+  </div>
+  <div>
+    Author: <%= @book[:author]%>
+  </div>
+  <div>
+    Published in: <%= @book[:published_in]%>
+  </div>
+  <div>
+    Volume: <%= @book[:volume]%>
+  </div>
+  <div>
+    Issue Status:
+    <span class="text-danger">
+    <% if @book.issued_books.present?%>
+      issued
+    <%else%>
+      Not issued
+    <%end%><span>
+  </div>
+
+  <div>
+    Issued To:
+    <span class="text-primary fs-5">
+    <% if !@book.issued_books.present?%>
+      Not Issued Yet
+    <%else%>
+      <%= @book.issued_books.first.student.name%> 
+    <%end%><span>
+  </div>
+
+  <div>
+    <%if @book.issued_books.present?%>
+      <div>
+        Issue Date : <%= @book.issued_books.first.issued_date%>
+      </div>
+      <div>
+        Return Date : <%= @book.issued_books.first.return_Date%>
+      </div>
+    <%end%>
+  </div>
+</div>
+
+<% if @book.issued_books.present?%>
+  <div class="btn btn-outline-info p-0"><%= link_to "Recieve Book", return_book_path(id: @book[:id]), class:"nav-link" %></div>
+<%end%>

@@ -1,0 +1,42 @@
+<h1>This is page after sigup/sign_in</h1>
+
+<div class="mt-4">
+  <h3>Available books</h3>
+</div>
+
+<div class="p-3 mb-4 mt-3">
+  <% @books.each do |book|%>
+    <li class ="d-flex gap-3 p-3 shadow ">
+        <div class="fs-5 text-primary me-2">
+          <%= book.title%>
+        </div>
+        <div >By
+          <span class="fs-5 text-danger me-2">
+          <%= book.author%></span>
+        </div>
+        <div>Part
+          <span class="fs-5 text-info me-2 ms-1">
+          <%= book.volume%></span>
+        </div>
+        <div >published in
+          <span class="fs-5 text-danger me-5 ms-1 ">
+          <%= book.published_in%></span>
+        </div>
+        <div class="ms-auto">
+          <% if book.issued_books.present? %>
+            <div class="btn btn-danger">issued</div>
+          <%else%>
+            <div class="btn btn-warning p-0"><%= link_to "Issue Book", issue_book_path(id: book[:id]), class:"nav-link"%></div>
+          <%end%>
+          <div class="btn btn-outline-info p-0"><%= link_to "Show Details", show_book_path(id: book[:id]), class:"nav-link"%></div>
+        </div>
+        <div>
+          <% if !book.issued_books.present?%>
+            <%= button_to "Remove Book", delete_book_path(id: book[:id]), method: :delete, class:"btn btn-outline-secondary ms-2"%>
+          <%end%>
+        </div>
+    </li>
+  <% end %>
+</div>
+
+<%= link_to "Add new Book", add_book_path, class:"nav-link"%>
